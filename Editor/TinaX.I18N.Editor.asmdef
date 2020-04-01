@@ -1,0 +1,19 @@
+{
+    "name": "TinaX.I18N.Editor",
+    "references": [
+        "GUID:76de87e88d7f16648b18970081285427",
+        "GUID:4e58fd8b44ff4c14f917ce28647bad94",
+        "GUID:eb0b36a1eab17c54a93dfa5bf816d363"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

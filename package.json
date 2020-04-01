@@ -1,0 +1,21 @@
+{
+  "name": "io.nekonya.tinax.i18n",
+  "version": "6.6.0-preview",
+  "displayName": "TinaX.I18N",
+  "description": "I18N Tools",
+  "unity": "2019.3",
+  "keywords": [
+    "TinaX",
+    "TinaX Framework",
+    "I18N"
+  ],
+  "author": {
+    "name": "yomunsam",
+    "email": "yomunsam@gmail.com",
+    "url": "https://yomunchan.moe"
+  },
+  "type": "library",
+  "dependencies": {
+    "io.nekonya.tinax.core":"6.6.0-preview"
+  }
+}

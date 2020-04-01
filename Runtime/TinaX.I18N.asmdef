@@ -1,0 +1,15 @@
+{
+    "name": "TinaX.I18N",
+    "references": [
+        "GUID:4e58fd8b44ff4c14f917ce28647bad94"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
