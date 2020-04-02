@@ -316,6 +316,8 @@ namespace TinaXEditor.I18N.Internal
 
                         GUILayout.Space(10);
                         EditorGUILayout.PropertyField(mConfig_SerObj.FindProperty("EnableI18N"));
+                        EditorGUILayout.PropertyField(mConfig_SerObj.FindProperty("DefaultRegion"),GUILayout.MaxWidth(300));
+                        EditorGUILayout.PropertyField(mConfig_SerObj.FindProperty("AutomaticMatchingBySystemLanaguage"),new GUIContent("Auto Match", "Automatically match regions according to system language"));
                         GUILayout.Space(10);
                         mList_Regions.DoLayoutList();
 
