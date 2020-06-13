@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TinaX.I18N;
 using TinaX.I18N.Const;
 using TinaX.Services;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
 
 namespace TinaX.I18N.Internal
 {
     public class I18NManager : II18N, II18NInternal
     {
-        [CatLib.Container.Inject]
+        [Inject]
         public IAssetService mAssets { get; set; }
 
         private I18NConfig mConfig;
@@ -27,26 +24,21 @@ namespace TinaX.I18N.Internal
         /// </summary>
         private Dictionary<string, Dictionary<string, string>> mDicts = new Dictionary<string, Dictionary<string, string>>();
 
-        private XException mStartException;
-        public XException GetStartException() => mStartException;
 
-        public async Task<bool> Start()
+        public async Task<XException> Start()
         {
-            if (mInited) return true;
+            if (mInited) return null;
             mConfig = XConfig.GetConfig<I18NConfig>(I18NConst.ConfigPath_Resources, AssetLoadType.Resources);
-            if (mConfig == null) 
-            {
-                mStartException = new XException("[TinaX.I18N]Load I18N config file failed. please cheak in ProjectSettings window.");
-                return false;
-            }
-            if (!mConfig.EnableI18N) return true;
-            if(mAssets == null)
-            {
-                mStartException = new XException("[TinaX.I18N]No service implements the built-in asset loading interface in Framework");
-                return false;
-            }
+            if (mConfig == null)
+                return new XException("[TinaX.I18N]Load I18N config file failed. please cheak in ProjectSettings window.");
 
-            if(mConfig.Regions != null && mConfig.Regions.Count > 0)
+            if (!mConfig.EnableI18N)
+                return null;
+
+            if(mAssets == null)
+                return new XException("[TinaX.I18N]No service implements the built-in asset loading interface in Framework");
+
+            if (mConfig.Regions != null && mConfig.Regions.Count > 0)
             {
                 bool check_default = !mConfig.DefaultRegion.IsNullOrEmpty();
                 string default_region_name = check_default ? mConfig.DefaultRegion.ToLower() : string.Empty;
@@ -97,12 +89,7 @@ namespace TinaX.I18N.Internal
                     }
                     catch(XException e)
                     {
-                        mStartException = e;
-                        return false;
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
+                        return e;
                     }
                 }
             }
@@ -118,7 +105,7 @@ namespace TinaX.I18N.Internal
             //}
             
             mInited = true;
-            return true;
+            return null;
         }
 
 

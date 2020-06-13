@@ -9,42 +9,24 @@ namespace TinaX.I18N
     [XServiceProviderOrder(100)]
     public class I18NProvider : IXServiceProvider
     {
-        private IXCore mCore;
         private II18NInternal mI18NInternal;
         public string ServiceName => I18NConst.ServiceName;
 
-        public Task<bool> OnInit()
+        public Task<XException> OnInit(IXCore core)
+            => Task.FromResult<XException>(null);
+
+        public void OnServiceRegister(IXCore core)
         {
-            mCore = XCore.GetMainInstance();
-            return Task.FromResult(true);
+            core.Services.Singleton<II18NInternal, I18NManager>()
+                .SetAlias<II18NInternal>();
         }
 
-        public XException GetInitException() => null;
-
-
-        public void OnServiceRegister()
-        {
-            mCore.BindSingletonService<II18N, I18NManager>().SetAlias<II18NInternal>();
-        }
-
-        public Task<bool> OnStart()
-        {
-            mI18NInternal = mCore.GetService<II18NInternal>();
-            return mI18NInternal.Start();
-        }
-        public XException GetStartException()
-        {
-            return mI18NInternal?.GetStartException();
-        }
-
-        
+        public Task<XException> OnStart(IXCore core)
+            => core.Services.Get<II18NInternal>().Start();
 
         public void OnQuit() { }
 
         public Task OnRestart() => Task.CompletedTask;
-
-        
-
         
     }
 }

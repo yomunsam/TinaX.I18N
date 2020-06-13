@@ -8,7 +8,6 @@ namespace TinaX.I18N.Internal
 {
     public interface II18NInternal
     {
-        XException GetStartException();
-        Task<bool> Start();
+        Task<XException> Start();
     }
 }
