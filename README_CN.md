@@ -1,4 +1,4 @@
-# TinaX Framework - 国际hua（）.
+# TinaX Framework - 国际化（I18N）.
 
 <img src="https://github.com/yomunsam/TinaX.Core/raw/master/readme_res/logo.png" width = "360" height = "160" alt="logo" align=center />
 
