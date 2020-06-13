@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TinaX.I18N.Const;
 using TinaX.I18N.Internal;
 using TinaX.Services;
@@ -17,7 +16,7 @@ namespace TinaX.I18N
 
         public void OnServiceRegister(IXCore core)
         {
-            core.Services.Singleton<II18NInternal, I18NManager>()
+            core.Services.Singleton<II18N, I18NManager>()
                 .SetAlias<II18NInternal>();
         }
 
