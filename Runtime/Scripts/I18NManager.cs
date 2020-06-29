@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TinaX.I18N.Const;
 using TinaX.Services;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace TinaX.I18N.Internal
 {
-    public class I18NManager : II18N, II18NInternal
+    public class I18NManager : II18N, II18NInternal, ILocalizationService
     {
         [Inject]
         public IAssetService mAssets { get; set; }
@@ -16,7 +17,13 @@ namespace TinaX.I18N.Internal
         private I18NConfig mConfig;
         private bool mInited = false;
 
-        private string mRegionName = string.Empty;
+        private string m_RegionName = string.Empty;
+
+        /// <summary>
+        /// 当前使用区域对应的语言列表
+        /// </summary>
+        private IEnumerable<string> m_CurrentLanguageNames;
+        private IEnumerable<SystemLanguage> m_CurrentLanguages;
 
         /// <summary>
         /// Global dict 
@@ -108,6 +115,8 @@ namespace TinaX.I18N.Internal
             return null;
         }
 
+        public IEnumerable<SystemLanguage> GetCurrentLanguages()
+            => m_CurrentLanguages;
 
         public Task UseRegionAsync(string regionName)
         {
@@ -235,7 +244,10 @@ namespace TinaX.I18N.Internal
                 }
             }
 
-            mRegionName = region.Name;
+            m_RegionName = region.Name;
+            this.m_CurrentLanguageNames = region.BindLanguage.Select(l => l.ToString()).ToArray();
+            this.m_CurrentLanguages = region.BindLanguage.ToArray();
+            Debug.Log($"[{I18NConst.ServiceName}] {(IsCmnHans() ? "使用区域：" : "Use region: ")} <color=#{TinaX.Internal.XEditorColorDefine.Color_Emphasize_16}>{region.Name}</color>");
             XEvent.Call(I18NEventConst.OnUseRegion, region.Name, TinaX.Const.FrameworkConst.FrameworkEventGroupName);
         }
 
@@ -247,5 +259,17 @@ namespace TinaX.I18N.Internal
             return json_obj;
         }
 
+
+        private bool IsCmnHans()
+        {
+            if (this.m_CurrentLanguages == null)
+                return false;
+            if (this.m_CurrentLanguages.Any(l => l == SystemLanguage.Chinese || l == SystemLanguage.ChineseSimplified))
+                return true;
+            else
+                return false;
+        }
+
+        
     }
 }

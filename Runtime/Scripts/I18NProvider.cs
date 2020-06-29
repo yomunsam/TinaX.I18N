@@ -16,7 +16,7 @@ namespace TinaX.I18N
 
         public void OnServiceRegister(IXCore core)
         {
-            core.Services.Singleton<II18N, I18NManager>()
+            core.Services.BindBuiltInService<ILocalizationService, II18N, I18NManager>()
                 .SetAlias<II18NInternal>();
         }
 

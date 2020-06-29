@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TinaX;
+using TinaX.I18N;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbarExtender;
-using TinaX;
-using TinaX.I18N;
 
 namespace TinaXEditor.I18N.Internal
 {
