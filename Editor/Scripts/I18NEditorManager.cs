@@ -214,6 +214,19 @@ namespace TinaXEditor.I18N
             return result;
         }
 
+        public static string GetText(string key, string group, string defaultValue)
+        {
+            if (cache.mDicts.TryGetValue(group, out var _dict))
+            {
+                if (_dict.TryGetValue(key, out var _value))
+                    return _value;
+                else
+                    return defaultValue;
+            }
+            else
+                return defaultValue;
+        }
+
     }
 
     public class I18NEditorDataCache : ScriptableSingleton<I18NEditorDataCache>

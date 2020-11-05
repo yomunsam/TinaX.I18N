@@ -27,7 +27,15 @@ namespace TinaXEditor.I18N.Components
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("I18N Key", GUILayout.Width(65));
             EditorGUILayout.PropertyField(this.serializedObject.FindProperty("I18NKey"),GUIContent.none);
-            GUILayout.Button("Refresh", GUILayout.MaxWidth(55));
+            if(GUILayout.Button("Refresh", GUILayout.MaxWidth(55)))
+            {
+                var _target = (TextLocalized)target;
+                var text = ((TextLocalized)target).GetComponent<Text>();
+                if (text != null)
+                {
+                    text.text = I18NEditorManager.GetText(_target.I18NKey, _target.I18NGroup, _target.I18NKey);
+                }
+            }
             EditorGUILayout.EndHorizontal();
             
             EditorGUILayout.BeginHorizontal();
