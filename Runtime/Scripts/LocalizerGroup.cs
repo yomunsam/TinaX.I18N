@@ -12,7 +12,7 @@
             _i18N = i18n;
         }
 
-        public string this [string key, params string[] formatArgs]
+        public string this [string key, params object[] formatArgs]
         {
             get
             {
