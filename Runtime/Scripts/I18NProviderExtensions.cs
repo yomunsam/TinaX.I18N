@@ -2,7 +2,7 @@
 
 namespace TinaX.Services
 {
-    public static class I18NProviderExtend
+    public static class I18NProviderExtensions
     {
         public static IXCore UseI18N(this IXCore core)
         {
